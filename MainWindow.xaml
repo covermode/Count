@@ -1,0 +1,78 @@
+﻿<Window x:Class="Count.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Count"
+        mc:Ignorable="d"
+        Title="Count" Height="400" Width="600" Background="{DynamicResource bgColor1}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}"
+        MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}" MinWidth="100" MinHeight="100" AllowsTransparency="False" ResizeMode="CanResize"
+    xmlns:System="clr-namespace:System;assembly=System.Runtime" Icon="/img/icon.png">
+    <Window.Resources>
+        <SolidColorBrush x:Key="bgColor1" Color="#FF111111"/>
+        <SolidColorBrush x:Key="bgColor2" Color="#FF1B1B1B"/>
+        <SolidColorBrush x:Key="bgColor3" Color="#FF1E1e1e"/>
+        <SolidColorBrush x:Key="bgColor4" Color="#FF222222"/>
+        <SolidColorBrush x:Key="bgColor5" Color="#FF5B5b5b"/>
+        <SolidColorBrush x:Key="fgColor1" Color="#FFC5C5C5"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource bgColor2}"/>
+            <Setter Property="Foreground" Value="{DynamicResource fgColor1}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource bgColor4}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource bgColor5}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource bgColor4}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource bgColor5}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <System:Double x:Key="ButtonWidth1">30</System:Double>
+        <System:Double x:Key="ButtonHeight1">20</System:Double>
+
+    </Window.Resources>
+    <Window.BorderBrush>
+        <SolidColorBrush Color="#00000000" Opacity="0"/>
+    </Window.BorderBrush>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        
+        <Button x:Name="button" Content="Press Me" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="100" Margin="0,100,0,0" FontFamily="Consolas" FontSize="16" Click="button_Click" BorderBrush="{DynamicResource bgColor4}" BorderThickness="1"/>
+        <Label x:Name="label" Content="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,97" FontFamily="Consolas" FontSize="24" Foreground="{DynamicResource fgColor1}"/>
+        <DockPanel x:Name="dockPanel" LastChildFill="False" VerticalAlignment="Top" Height="20" Background="{DynamicResource bgColor2}" MouseDown="DockPanel_MouseDown">
+            <Button Height="{DynamicResource ButtonHeight1}" x:Name="closeButton" Width="{DynamicResource ButtonWidth1}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="closeButton_Click">
+                <Image x:Name="closeImage" HorizontalAlignment="Stretch" Width="{DynamicResource ButtonWidth1}" Height="{DynamicResource ButtonHeight1}" Source="/img/close.png"/>
+            </Button>
+            <Button Height="{DynamicResource ButtonHeight1}" x:Name="maximizeButton" Width="{DynamicResource ButtonWidth1}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="maximizeButton_Click">
+                <StackPanel>
+                    <Image x:Name="maximizeImage" HorizontalAlignment="Left" Width="{DynamicResource ButtonWidth1}" Height="{DynamicResource ButtonHeight1}" Source="/img/maximize.png" VerticalAlignment="Top"/>
+                    <Image x:Name="restoreImage" HorizontalAlignment="Left" Width="{DynamicResource ButtonWidth1}" Height="{DynamicResource ButtonHeight1}" Source="/img/restore.png" VerticalAlignment="Top" Visibility="Collapsed"/>
+
+                </StackPanel>
+            </Button>
+            <Button Height="{DynamicResource ButtonHeight1}" x:Name="minimizeButton" Width="{DynamicResource ButtonWidth1}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="minimizeButton_Click">
+                <Image x:Name="minimizeImage" HorizontalAlignment="Stretch" Width="{DynamicResource ButtonWidth1}" Height="{DynamicResource ButtonHeight1}" Source="/img/minimize.png"/>
+            </Button>
+            <Label x:Name="label1" Content="Count" FontFamily="Consolas" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="{DynamicResource fgColor1}" FontStyle="Normal" FontWeight="Normal" Height="40" FontSize="16"/>
+
+        </DockPanel>
+
+    </Grid>
+</Window>
